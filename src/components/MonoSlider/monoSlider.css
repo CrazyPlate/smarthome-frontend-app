@@ -1,0 +1,15 @@
+.MuiSlider-rail {
+	color: red;
+}
+
+.MuiSlider-track {
+	color: rgb(199, 120, 120);
+}
+
+.MuiSlider-thumb {
+	color: green;
+}
+
+.slider {
+	transform: scaleX(3) scaleY(3);
+}
