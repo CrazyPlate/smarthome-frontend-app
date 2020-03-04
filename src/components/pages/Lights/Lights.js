@@ -6,8 +6,8 @@ import './Lights.css';
 const lightsPage = props => {
     return (
         <div className="lights-wrapper">
-            <LightComponent dimmer />
-            <LightComponent />
+            <LightComponent dimmer name="Dimmer" />
+            <LightComponent RGB name="RGB" />
             <LightComponent />
         </div>
     );

@@ -1,51 +1,32 @@
-import React, { Component } from "react";
-
-class TemperaturePage extends Component {
-   state = {
-      temperature: null
+const fetchTemperature = async () => {
+   const requestBody = {
+      query: `
+            query {
+               temperature {
+                  temperature
+               }
+               }
+         `
    };
 
-   componentDidMount() {
-      this.fetchTemperature();
-   }
-
-   fetchTemperature = () => {
-      const requestBody = {
-         query: `
-               query {
-                  temperature {
-                    temperature
-                  }
-                }
-            `
-      };
-
-      fetch("http://192.168.1.214:4000/graphql", {
-         method: "POST",
-         body: JSON.stringify(requestBody),
-         headers: {
-            "Content-Type": "application/json",
-         },
+   await fetch("http://192.168.1.214:4000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+         "Content-Type": "application/json",
+      },
+   })
+      .then(res => {
+         if (res.status !== 200 && res.status !== 201) {
+            throw new Error("Failed!");
+         }
+         return res.json();
       })
-         .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-               throw new Error("Failed!");
-            }
-            return res.json();
-         })
-         .then(resData => {
-            const temperature = resData.data.temperature.temperature;
-            this.setState({temperature: temperature});
-         })
-   };
+      .then(resData => {
+         const temperature = resData.data.temperature.temperature;
+         console.log(temperature);
+         return temperature;
+      })
+};
 
-      render() {
-      return (
-         <React.Fragment>
-            <div onClick={this.fetchTemperature}>{this.state.temperature}</div>
-         </React.Fragment>
-      );
-   }
-}
-
-export default TemperaturePage;
+export default fetchTemperature;

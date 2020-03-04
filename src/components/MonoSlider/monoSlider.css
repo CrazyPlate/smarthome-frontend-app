@@ -10,6 +10,6 @@
 	color: green;
 }
 
-.slider {
-	transform: scaleX(3) scaleY(3);
-}
+/* .slider {
+	transform: scaleX(1.5) scaleY(1.5);
+} */

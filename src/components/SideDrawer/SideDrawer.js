@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './SideDrawer.css';
-import { render } from '@testing-library/react';
 
 class sideDrawer extends React.Component {
     clickLightsPageHandler = () => {

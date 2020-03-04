@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MonoSlider from '../../../MonoSlider/monoSlider';
+import RGBSlider from '../../../RGBSlider/RGBSlider';
 import './LightComponent.css';
 
 class lightComponent extends React.Component {
@@ -27,7 +28,7 @@ class lightComponent extends React.Component {
             <div className={containerClasses}>
                 <div className="light-container__main">
                     {/* <div><i className="fa fa-angle-down"></i></div> */}
-                    <div className="light-container__name">NAME</div>
+                    <div className="light-container__name">{this.props.name}</div>
                     <div className="toggle-button">
                         <input
                             type="checkbox"
@@ -40,6 +41,7 @@ class lightComponent extends React.Component {
                 </div>
                 {this.state.isChecked && <div className={actionClasses}>
                     {this.props.dimmer && <MonoSlider />}
+                    {this.props.RGB && <RGBSlider />}
                 </div>}
             </div>
         );
