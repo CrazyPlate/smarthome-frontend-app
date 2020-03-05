@@ -2,6 +2,7 @@ import React from 'react';
 
 import MonoSlider from '../../../MonoSlider/monoSlider';
 import RGBSlider from '../../../RGBSlider/RGBSlider';
+import ToggleDigitalPin from './ToggleDigitalPin/ToggleDigitalPin';
 import './LightComponent.css';
 
 class lightComponent extends React.Component {
@@ -40,8 +41,9 @@ class lightComponent extends React.Component {
                     </div>
                 </div>
                 {this.state.isChecked && <div className={actionClasses}>
-                    {this.props.dimmer && <MonoSlider />}
+                    {this.props.dimmer && <div className="monoslider__container"><MonoSlider /></div>}
                     {this.props.RGB && <RGBSlider />}
+                    {this.props.toggleDigitalPin && <ToggleDigitalPin />}
                 </div>}
             </div>
         );

@@ -1,13 +1,17 @@
+.monoslider__container {
+	width: 90%;
+}
+
 .MuiSlider-rail {
-	color: red;
+	color: rgb(255, 255, 255);
 }
 
 .MuiSlider-track {
-	color: rgb(199, 120, 120);
+	color: rgb(255, 255, 255);
 }
 
 .MuiSlider-thumb {
-	color: green;
+	color: rgb(255, 255, 255);
 }
 
 /* .slider {
