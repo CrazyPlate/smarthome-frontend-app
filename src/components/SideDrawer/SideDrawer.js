@@ -22,8 +22,8 @@ class sideDrawer extends React.Component {
         return (
             <nav className={drawerClasses}>
                 <ul>
-                    <li onClick={this.clickLightsPageHandler}>Lights</li>
-                    <li onClick={this.clickClimatePageHandler}>Climate</li>
+                    <li onClick={this.clickLightsPageHandler}><i className="fa fa-lightbulb"></i>Lights</li>
+                    <li onClick={this.clickClimatePageHandler}><i className="fa fa-cloud-sun"></i>Climate</li>
                 </ul>
             </nav>
         )

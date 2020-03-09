@@ -5,7 +5,7 @@ class Temperature extends React.Component {
         temperature: null
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.fetchTemperature();
     }
 
