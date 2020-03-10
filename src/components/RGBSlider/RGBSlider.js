@@ -12,36 +12,37 @@ class RGBSlider extends React.Component {
       };
     
       handleChange = (color) => {
+        console.log(color.rgb)
         if (color.rgb.r < 100) {
           if (color.rgb.r < 10) {
-            color.rgb.r = "00" + color.rgb.r
-          } else {
             color.rgb.r = "0" + color.rgb.r
           }
+            color.rgb.r = "0" + color.rgb.r
         }
 
         if (color.rgb.g < 100) {
           if (color.rgb.g < 10) {
-            color.rgb.g = "00" + color.rgb.g
-          } else {
             color.rgb.g = "0" + color.rgb.g
           }
+            color.rgb.g = "0" + color.rgb.g
         }
 
         if (color.rgb.b < 100) {
           if (color.rgb.b < 10) {
-            color.rgb.b = "00" + color.rgb.b
-          } else {
             color.rgb.b = "0" + color.rgb.b
           }
+            color.rgb.b = "0" + color.rgb.b
         }
+        const rgbValue = ""+this.state.r + this.state.g + this.state.b
 
         this.setState({
           r: color.rgb.r,
           g: color.rgb.g,
           b: color.rgb.b,
-          rgbValue: ""+this.state.r + this.state.g + this.state.b
+          rgbValue: rgbValue
         });
+
+        console.log(this.state.rgbValue)
 
           const requestBody = {
               query: `
@@ -72,7 +73,7 @@ class RGBSlider extends React.Component {
               return res.json();
           })
           .then(resData => {
-              
+              console.log(resData);
           })
           .catch(err => {
               throw Error('RGB Error');
@@ -83,7 +84,7 @@ class RGBSlider extends React.Component {
     return (
         <div className="huePicker__container">
           <HuePicker
-            onChange={ this.handleChange }
+            onChangeComplete={ this.handleChange }
           />
         </div>);
   }

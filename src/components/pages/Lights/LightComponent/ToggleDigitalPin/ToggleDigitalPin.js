@@ -3,7 +3,7 @@ import React from 'react';
 class toggleDigitalPin extends React.Component {
 
     state = {
-        pin: "5",
+        pin: "9",
         pinState: "D0"
     }
 

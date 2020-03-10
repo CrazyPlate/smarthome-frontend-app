@@ -4,7 +4,7 @@ import Slider from '@material-ui/core/Slider';
 import './monoSlider.css';
 
 export default function monoSlider() {
-    const pin = "5";
+    const pin = "11";
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState(50);
   
