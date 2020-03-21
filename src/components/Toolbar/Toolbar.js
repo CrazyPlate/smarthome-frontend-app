@@ -13,6 +13,10 @@ class toolbar extends React.Component {
         this.props.changePageHandler("climate");
     }
 
+    clickTrendPageHandler = () => {
+        this.props.changePageHandler("trend");
+    }
+
     render() {
         return (
             <header className="toolbar">
@@ -28,6 +32,7 @@ class toolbar extends React.Component {
                         <ul>
                             <li onClick={this.clickLightsPageHandler}>Lights</li>
                             <li onClick={this.clickClimatePageHandler}>Climate</li>
+                            <li onClick={this.clickTrendPageHandler}>Trend</li>
                         </ul>
                     </div>
                 </nav>

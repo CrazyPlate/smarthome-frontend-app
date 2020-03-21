@@ -5,6 +5,7 @@ import Toolbar from './components/Toolbar/Toolbar';
 import SideDrawer from './components/SideDrawer/SideDrawer';
 import LightsPage from './components/pages/Lights/Lights';
 import ClimatePage from './components/pages/Climate/Climate';
+import TrendPage from './components/pages/Trend/Trend';
 
 import './App.css';
 
@@ -42,6 +43,8 @@ class App extends React.Component {
       activePage = <LightsPage />
     } else if (this.state.activePage === "climate") {
       activePage = <ClimatePage />
+    } else if (this.state.activePage === "trend") {
+      activePage = <TrendPage />
     }
 
     return (

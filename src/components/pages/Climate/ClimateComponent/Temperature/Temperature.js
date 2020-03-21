@@ -13,7 +13,7 @@ class Temperature extends React.Component {
         const requestBody = {
             query: `
                 query {
-                    temperature {
+                    currentTemperature {
                         temperature
                     }
                 }
@@ -34,9 +34,9 @@ class Temperature extends React.Component {
               return res.json();
            })
            .then(resData => {
-              const temperature = resData.data.temperature.temperature;
-              /* console.log(temperature);
-              return temperature; */
+              const temperature = resData.data.currentTemperature.temperature;
+              console.log(temperature)
+
               this.setState({
                 temperature: temperature
             })
