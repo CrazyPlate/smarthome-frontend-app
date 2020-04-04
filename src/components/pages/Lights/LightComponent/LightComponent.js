@@ -1,7 +1,7 @@
 import React from 'react';
 
-import MonoSlider from '../../../MonoSlider/monoSlider';
-import RGBSlider from '../../../RGBSlider/RGBSlider';
+import MonoSlider from './MonoSlider/monoSlider';
+import RGBSlider from './RGBSlider/RGBSlider';
 import ToggleDigitalPin from './ToggleDigitalPin/ToggleDigitalPin';
 import './LightComponent.css';
 
