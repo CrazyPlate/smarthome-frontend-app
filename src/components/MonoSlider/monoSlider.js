@@ -26,7 +26,7 @@ export default function monoSlider() {
         }
       }
 
-      fetch("http://192.168.1.214:4000/graphql", {
+      fetch("http://192.168.0.214:4000/graphql", {
         method: "POST",
         body: JSON.stringify(requestBody),
         headers: {

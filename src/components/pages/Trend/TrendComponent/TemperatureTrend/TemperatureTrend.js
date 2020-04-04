@@ -44,7 +44,7 @@ class TemperatureTrend extends React.Component {
                 `
         };
      
-        await fetch("http://192.168.1.214:4000/graphql", {
+        await fetch("http://192.168.0.214:4000/graphql", {
            method: "POST",
            body: JSON.stringify(requestBody),
            headers: {
@@ -69,6 +69,7 @@ class TemperatureTrend extends React.Component {
                     const seconds = "0" + currentDate.getSeconds();
 
                     const dateString = day + ' ' + (month+1) + ' ' + year;
+                    console.log(dateString)
                     const timeString = hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
                     labels.push(timeString);
                     data.push(resData.data.trendTemps[i].temperature);

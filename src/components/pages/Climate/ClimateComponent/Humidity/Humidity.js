@@ -5,18 +5,22 @@ class Humidity extends React.Component {
         humidity: null
     }
 
+    UNSAFE_componentWillMount() {
+        this.fetchHumidity();
+    }
+
     fetchHumidity = async () => {
         const requestBody = {
             query: `
                 query {
-                    humidity {
+                    currentHumidity {
                         humidity
                     }
                 }
               `
         };
      
-        await fetch("http://192.168.1.214:4000/graphql", {
+        await fetch("http://192.168.0.214:4000/graphql", {
            method: "POST",
            body: JSON.stringify(requestBody),
            headers: {
@@ -30,7 +34,7 @@ class Humidity extends React.Component {
               return res.json();
            })
            .then(resData => {
-              const humidity = "80";
+              const humidity = resData.data.currentHumidity.humidity;
 
               this.setState({
                 humidity: humidity

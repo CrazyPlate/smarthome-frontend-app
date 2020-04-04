@@ -20,7 +20,7 @@ class Temperature extends React.Component {
               `
         };
      
-        await fetch("http://192.168.1.214:4000/graphql", {
+        await fetch("http://192.168.0.214:4000/graphql", {
            method: "POST",
            body: JSON.stringify(requestBody),
            headers: {
@@ -35,7 +35,6 @@ class Temperature extends React.Component {
            })
            .then(resData => {
               const temperature = resData.data.currentTemperature.temperature;
-              console.log(temperature)
 
               this.setState({
                 temperature: temperature
