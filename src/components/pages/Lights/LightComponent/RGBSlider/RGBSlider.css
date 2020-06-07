@@ -1,3 +1,26 @@
 .huePicker__container {
 	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.huePicker__container .button {
+	margin-right: 1rem;
+}
+
+.hue-horizontal div div {
+	visibility: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+	.huePicker__container {
+		flex-direction: column-reverse;
+	}
+
+	.huePicker__container .button {
+		margin-right: 0;
+		margin-top: 1rem;
+	}
 }

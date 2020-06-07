@@ -1,9 +1,4 @@
 .chart__container {
 	position: relative;
 	height: 220px;
-	width: 100%;
-}
-
-canvas {
-	height: 100%;
 }

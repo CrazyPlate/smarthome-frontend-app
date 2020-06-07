@@ -41,7 +41,8 @@ class lightComponent extends React.Component {
                     </div>
                 </div>
                 {this.state.isChecked && <div className={actionClasses}>
-                    {this.props.temperature && <Temperature />}
+                    {this.props.temperatureInside && <Temperature inside />}
+                    {this.props.temperatureOutside && <Temperature outside />}
                     {this.props.humidity && <Humidity />}
                 </div>}
             </div>

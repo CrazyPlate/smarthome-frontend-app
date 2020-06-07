@@ -6,8 +6,8 @@ import './Lights.css';
 const lightsPage = props => {
     return (
         <div className="lights-wrapper">
-            <LightComponent toggleDigitalPin name="On/Off"/>
-            <LightComponent dimmer name="Dimmer" />
+            <LightComponent toggleDigitalPin name="Światło kuchnia"/>
+            <LightComponent dimmer name="Ściemniacz" />
             <LightComponent RGB name="RGB" />
         </div>
     );

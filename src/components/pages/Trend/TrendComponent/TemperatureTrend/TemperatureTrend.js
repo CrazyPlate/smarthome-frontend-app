@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 import './TemperatureTrend.css';
@@ -12,7 +12,7 @@ class TemperatureTrend extends React.Component {
 
         this.state = {
             isLoading: false,
-            chartWidth: 340,
+            chartWidth: window.innerWidth/1.2,
             chartHeight: 220,
             chartData: {
                 labels: [],
@@ -31,6 +31,17 @@ class TemperatureTrend extends React.Component {
         });
         this.fetchTemperature();
     }
+
+    componentDidMount() {
+        window.addEventListener('resize', this.updateDimensions);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
+
+    updateDimensions = () => {
+        this.setState({ chartWidth: window.innerWidth});
+    };
 
     fetchTemperature = async () => {
         const requestBody = {
@@ -58,8 +69,14 @@ class TemperatureTrend extends React.Component {
               return res.json();
            })
            .then(resData => {
-
-                for (let i = resData.data.trendTemps.length - 10; i < resData.data.trendTemps.length; i++) {
+               let lengthOfFetchedData;
+                if (resData.data.trendTemps.length > 30) {
+                    lengthOfFetchedData = resData.data.trendTemps.length - 30
+                } else {
+                    lengthOfFetchedData = 0;
+                }
+                
+                for (let i = lengthOfFetchedData; i < resData.data.trendTemps.length; i++) {
                     const currentDate = new Date(Number(resData.data.trendTemps[i].date));
                     const year = currentDate.getFullYear();
                     const month = currentDate.getMonth();
@@ -68,9 +85,9 @@ class TemperatureTrend extends React.Component {
                     const minutes = "0" + currentDate.getMinutes();
                     const seconds = "0" + currentDate.getSeconds();
 
+                    // eslint-disable-next-line no-unused-vars
                     const dateString = day + ' ' + (month+1) + ' ' + year;
-                    console.log(dateString)
-                    const timeString = hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+                    const timeString = hours + ":" + minutes.substr(-2);
                     labels.push(timeString);
                     data.push(resData.data.trendTemps[i].temperature);
                 }
@@ -79,7 +96,6 @@ class TemperatureTrend extends React.Component {
                         labels: labels,
                         datasets: [
                             {
-                                label: 'Temperature',
                                 fill: false,
                                 lineTension: 0.3,
                                 backgroundColor: 'rgba(255,255,255,1)',
@@ -108,24 +124,30 @@ class TemperatureTrend extends React.Component {
            })
      };
 
-    /* setCanvasDimensions() {
-        console.log("ABC")
-        this.setState({
-            chartWidth: window.innerWidth/2,
-            chartHeight: window.innerHeight/2
-        })
-    } */
-
-
     render() {        
         return (
             <div className="chart__container">
-                {!this.state.isLoading && <Line
+                <div>{!this.state.isLoading && <Line
                     data={this.state.chartData}
                     width={this.state.chartWidth}
                     height={this.state.chartHeight}
-                    options={{ maintainAspectRatio: false }}
-                />}
+                    options={{ 
+                        animation: false,
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    suggestedMin: 24,
+                                    suggestedMax: 25
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                    }}
+                />}</div>
             </div>);
       }
 }

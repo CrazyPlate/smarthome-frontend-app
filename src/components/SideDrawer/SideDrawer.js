@@ -18,6 +18,11 @@ class sideDrawer extends React.Component {
         this.props.backdrop();
     }
 
+    clickModbusPageHandler = () => {
+        this.props.changePageHandler("modbus");
+        this.props.backdrop();
+    }
+
     render() {
         let drawerClasses = "side-drawer";
 
@@ -30,6 +35,7 @@ class sideDrawer extends React.Component {
                     <li onClick={this.clickLightsPageHandler}><i className="fa fa-lightbulb"></i>Lights</li>
                     <li onClick={this.clickClimatePageHandler}><i className="fa fa-cloud-sun"></i>Climate</li>
                     <li onClick={this.clickTrendPageHandler}><i className="fa fa-cloud-sun"></i>Trend</li>
+                    <li onClick={this.clickModbusPageHandler}><i className="fa fa-cloud-sun"></i>Modbus</li>
                 </ul>
             </nav>
         )

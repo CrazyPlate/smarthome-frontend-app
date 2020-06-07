@@ -30,13 +30,14 @@
 .side-drawer li {
 	width: 70%;
 	margin: 0.5rem 0;
-	color: #521751;
+	color: #3f145c;
 	text-decoration: none;
 	font-size: 1.2rem;
 	cursor: pointer;
 	padding: .5rem;
-	border: 2px solid #521751;
+	border: 2px solid #3f145c;
 	border-radius: 1rem;
+	box-shadow: 1px 1px 10px 3px rgba(4, 5, 53, 0.5);
 }
 
 .side-drawer li:hover,

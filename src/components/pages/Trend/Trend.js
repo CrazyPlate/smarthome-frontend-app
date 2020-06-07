@@ -6,7 +6,7 @@ import './Trend.css';
 const trendPage = props => {
     return (
         <div className="trend-wrapper">
-            <TrendComponent temperature name="Temperature"/>
+            <TrendComponent temperature name="Temperatura"/>
         </div>
     );
 }

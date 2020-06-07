@@ -6,6 +6,7 @@ import SideDrawer from './components/SideDrawer/SideDrawer';
 import LightsPage from './components/pages/Lights/Lights';
 import ClimatePage from './components/pages/Climate/Climate';
 import TrendPage from './components/pages/Trend/Trend';
+import ModbusPage from './components/pages/Modbus/Modbus';
 
 import './App.css';
 
@@ -24,11 +25,11 @@ class App extends React.Component {
   };
 
   backdropClickHandler = () => {
-    this.setState({sideDrawerOpen: false});
+    this.setState({ sideDrawerOpen: false });
   };
 
   changePageHandler = (page) => {
-    this.setState({activePage: page});
+    this.setState({ activePage: page });
   }
 
   render() {
@@ -36,7 +37,7 @@ class App extends React.Component {
     let activePage;
 
     if (this.state.sideDrawerOpen) {
-      backdrop = <Backdrop click={this.backdropClickHandler}/>
+      backdrop = <Backdrop click={this.backdropClickHandler} />
     }
 
     if (this.state.activePage === "lights") {
@@ -45,11 +46,13 @@ class App extends React.Component {
       activePage = <ClimatePage />
     } else if (this.state.activePage === "trend") {
       activePage = <TrendPage />
+    } else if (this.state.activePage === "modbus") {
+      activePage = <ModbusPage />
     }
 
     return (
       <div className="App">
-        <Toolbar 
+        <Toolbar
           drawerClickHandler={this.drawerToggleClickHandler}
           changePageHandler={this.changePageHandler}
         />

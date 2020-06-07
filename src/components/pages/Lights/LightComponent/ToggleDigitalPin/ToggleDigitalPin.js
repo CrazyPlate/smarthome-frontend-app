@@ -1,4 +1,5 @@
 import React from 'react';
+import "./ToggleDigitalPin.css";
 
 class toggleDigitalPin extends React.Component {
 
@@ -87,7 +88,7 @@ class toggleDigitalPin extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.togglePin}>Toggle LED</button>
+                <div className="button" onClick={this.togglePin}>Toggle LED</div>
             </div>
         );
     }

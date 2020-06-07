@@ -44,7 +44,10 @@ class Temperature extends React.Component {
 
      render() {
         return (
-            <div className="temperature__action">{this.state.temperature} °C</div>
+            <React.Fragment>
+                {this.props.inside && <div className="temperature__action">{this.state.temperature} °C</div>}
+                {this.props.outside && <div className="temperature__action">12,6 °C</div>}
+            </React.Fragment>
         )
      }
     }
