@@ -1,12 +1,10 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-import './TemperatureTrend.css';
-
 let labels = [];
 let data = [];
 
-class TemperatureTrend extends React.Component {
+class EnergyTrend extends React.Component {
     constructor() {
         super();
 
@@ -47,8 +45,8 @@ class TemperatureTrend extends React.Component {
         const requestBody = {
             query: `
                 query {
-                    trendTemps {
-                        temperature
+                    trendEnergy {
+                        energy
                         date
                     }   
                 }
@@ -70,14 +68,14 @@ class TemperatureTrend extends React.Component {
            })
            .then(resData => {
                let lengthOfFetchedData;
-                if (resData.data.trendTemps.length > 30) {
-                    lengthOfFetchedData = resData.data.trendTemps.length - 30
+                if (resData.data.trendEnergy.length > 24) {
+                    lengthOfFetchedData = resData.data.trendEnergy.length - 24
                 } else {
                     lengthOfFetchedData = 0;
                 }
                 
-                for (let i = lengthOfFetchedData; i < resData.data.trendTemps.length; i++) {
-                    const currentDate = new Date(Number(resData.data.trendTemps[i].date));
+                for (let i = lengthOfFetchedData; i < resData.data.trendEnergy.length; i++) {
+                    const currentDate = new Date(Number(resData.data.trendEnergy[i].date));
                     const year = currentDate.getFullYear();
                     const month = currentDate.getMonth();
                     const day = currentDate.getDate();
@@ -89,7 +87,7 @@ class TemperatureTrend extends React.Component {
                     const dateString = day + ' ' + (month+1) + ' ' + year;
                     const timeString = hours + ":" + minutes.substr(-2);
                     labels.push(timeString);
-                    data.push(resData.data.trendTemps[i].temperature);
+                    data.push(resData.data.trendEnergy[i].energy);
                 }
                 this.setState({
                     chartData: {
@@ -138,8 +136,8 @@ class TemperatureTrend extends React.Component {
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    suggestedMin: 24,
-                                    suggestedMax: 25
+                                    suggestedMin: 0,
+                                    suggestedMax: 1600
                                 }
                             }]
                         },
@@ -152,4 +150,4 @@ class TemperatureTrend extends React.Component {
       }
 }
 
-export default TemperatureTrend;
+export default EnergyTrend;
