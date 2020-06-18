@@ -2,13 +2,23 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 let labels = [];
-let data = [];
+let powerData = [];
+let energyData = [];
+let date = null;
+
+let chartLimits = {
+    minPower: 0,
+    maxPower: 2000,
+    minEnergy: 0,
+    maxEnergy: 200
+};
 
 class EnergyTrend extends React.Component {
     constructor() {
         super();
 
         this.state = {
+            date: date,
             isLoading: false,
             chartWidth: window.innerWidth/1.2,
             chartHeight: 220,
@@ -46,6 +56,7 @@ class EnergyTrend extends React.Component {
             query: `
                 query {
                     trendEnergy {
+                        power
                         energy
                         date
                     }   
@@ -83,12 +94,17 @@ class EnergyTrend extends React.Component {
                     const minutes = "0" + currentDate.getMinutes();
                     //const seconds = "0" + currentDate.getSeconds();
 
-                    // eslint-disable-next-line no-unused-vars
-                    const dateString = day + ' ' + (month+1) + ' ' + year;
+                    date = day + ' ' + (month+1) + ' ' + year;
                     const timeString = hours + ":" + minutes.substr(-2);
                     labels.push(timeString);
-                    data.push(resData.data.trendEnergy[i].energy);
+                    powerData.push(resData.data.trendEnergy[i].power);
+                    energyData.push(resData.data.trendEnergy[i].energy);
                 }
+                chartLimits.minPower = Math.min.apply(null, powerData) - (Math.max.apply(null, powerData)-Math.min.apply(null, powerData)) / 10;
+                chartLimits.maxPower = Math.max.apply(null, powerData) + (Math.max.apply(null, powerData)-Math.min.apply(null, powerData)) / 20;
+                chartLimits.minEnergy = Math.min.apply(null, energyData) - (Math.max.apply(null, energyData)-Math.min.apply(null, energyData)) / 10;
+                chartLimits.maxEnergy = Math.max.apply(null, energyData) + (Math.max.apply(null, energyData)-Math.min.apply(null, energyData)) / 20;
+
                 this.setState({
                     chartData: {
                         labels: labels,
@@ -111,21 +127,49 @@ class EnergyTrend extends React.Component {
                                 pointHoverBorderWidth: 0,
                                 pointRadius: 0,
                                 pointHitRadius: 10,
-                                data: data
+                                data: energyData,
+                                yAxisID: 'energyAxis'
+                            },
+                            {
+                                fill: false,
+                                lineTension: 0.3,
+                                backgroundColor: 'rgba(255,255,0,1)',
+                                borderColor: 'rgba(255,255,0,1)',
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'miter',
+                                pointBorderColor: 'rgba(255,255,255,1)',
+                                pointBackgroundColor: '#fff',
+                                pointBorderWidth: 0,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: 'rgba(255,255,255,1)',
+                                pointHoverBorderColor: 'rgba(255,255,255,1)',
+                                pointHoverBorderWidth: 0,
+                                pointRadius: 0,
+                                pointHitRadius: 10,
+                                data: powerData,
+                                yAxisID: 'powerAxis'
                             }
                         ]
                     },
-                    isLoading: false
+                    isLoading: false,
+                    date: date
                 });
                 labels = [];
-                data = [];
+                powerData = [];
+                energyData = [];
+                console.log(chartLimits)
            })
      };
 
     render() {        
         return (
             <div className="chart__container">
-                <div>{!this.state.isLoading && <Line
+                <div>{!this.state.isLoading && 
+                <div>
+                {/* <div>{this.state.date}</div> */}
+                <Line
                     data={this.state.chartData}
                     width={this.state.chartWidth}
                     height={this.state.chartHeight}
@@ -134,18 +178,44 @@ class EnergyTrend extends React.Component {
                         maintainAspectRatio: false,
                         responsive: true,
                         scales: {
-                            yAxes: [{
+                            yAxes: 
+                            [{
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                id: 'energyAxis',
+                                labels: {
+                                    show: false
+                                },
                                 ticks: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 1600
+                                    suggestedMin: chartLimits.minEnergy,
+                                    suggestedMax: chartLimits.maxEnergy
                                 }
-                            }]
+                            },
+                            {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                gridLines: {
+                                    display: false
+                                },
+                                id: 'powerAxis',
+                                labels: {
+                                    show: false
+                                },
+                                ticks: {
+                                    suggestedMin: chartLimits.minPower,
+                                    suggestedMax: chartLimits.maxPower
+                                }
+                            }
+                        ]
                         },
                         legend: {
-                            display: false
+                            display: true,
+                            position: 'left'
                         },
                     }}
-                />}</div>
+                /></div>}</div>
             </div>);
       }
 }
